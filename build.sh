@@ -196,6 +196,7 @@ else
 fi
 
 lunch statix_$TARGET-$VARIANT || exit_on_error
+m installclean
 
 if [ "$CLEAN_BUILD" = "true" ]; then
     clean_build
