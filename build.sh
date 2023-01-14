@@ -166,7 +166,7 @@ else
     echo "Checking if tree exists in manifests"
     if test -f "device/manifests/$TARGET.xml"; then
         echo "Syncing $TARGET trees"
-        if ![ -d .repo/local_manifests]; then
+        if ! [ -d .repo/local_manifests ]; then
             mkdir -p .repo/local_manifests/
         fi
         cp device/manifests/$TARGET.xml .repo/local_manifests/
