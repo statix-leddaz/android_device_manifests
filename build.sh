@@ -41,6 +41,9 @@ OPTIONS:
     -p, --package-type
         Specifies package type to build (Default: otapackage)
 
+    -s, --sixtyfour-bits
+        Builds a 64-bit only package if supported by the device tree
+
     -u, --update-api
         Update APIs
 
@@ -100,7 +103,7 @@ JOBS=8
 
 # Setup getopt.
 long_opts="clean_build,debug,help,image:,jobs:,log_file:,module:,"
-long_opts+="package-type:,update-api,build_variant:"
+long_opts+="sixtyfour-bits,package-type:,update-api,build_variant:"
 getopt_cmd=$(getopt -o cdhi:j:k:l:m:p:s:uv: --long "$long_opts" \
             -n $(basename $0) -- "$@") || \
             { echo -e "\nERROR: Getopt failed. Extra args\n"; usage; exit 1;}
@@ -117,6 +120,7 @@ while true; do
         -l|--log_file) LOG_FILE="$2"; shift;;
         -m|--module) MODULE="$2"; shift;;
         -p|--package-type) PKG="$2"; shift;;
+        -s|--sixtyfour-bits) SIXTYFOUR_BITS="true";;
         -u|--update-api) UPDATE_API="true";;
         -v|--build_variant) VARIANT="$2"; shift;;
         --) shift; break;;
@@ -174,7 +178,11 @@ else
     fi
 fi
 
-lunch statix_$TARGET-$VARIANT || exit_on_error
+if [ "$SIXTYFOUR_BITS" = "true" ]; then
+    lunch statix_${TARGET}_64-$VARIANT || exit_on_error
+else
+    lunch statix_$TARGET-$VARIANT || exit_on_error
+fi
 m installclean
 
 if [ "$CLEAN_BUILD" = "true" ]; then
