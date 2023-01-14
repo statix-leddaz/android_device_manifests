@@ -104,7 +104,7 @@ JOBS=8
 # Setup getopt.
 long_opts="clean_build,debug,help,image:,jobs:,log_file:,module:,"
 long_opts+="sixtyfour-bits,package-type:,update-api,build_variant:"
-getopt_cmd=$(getopt -o cdhi:j:k:l:m:p:s:uv: --long "$long_opts" \
+getopt_cmd=$(getopt -o cdhi:j:k:l:m:p:suv: --long "$long_opts" \
             -n $(basename $0) -- "$@") || \
             { echo -e "\nERROR: Getopt failed. Extra args\n"; usage; exit 1;}
 
