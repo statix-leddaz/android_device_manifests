@@ -13,7 +13,7 @@
     <project path="device/xiaomi/curtana-kernel" name="android_device_xiaomi_curtana-kernel" remote="leddaz" />
 
     <!-- Vendor -->
-    <project path="vendor/hardware/xiaomi" name="android_vendor_hardware_xiaomi" remote="statix" />
+    <project path="vendor/hardware/xiaomi" name="android_vendor_hardware_xiaomi" remote="statix" revision="tm" />
     <project path="vendor/xiaomi/curtana" name="android_vendor_xiaomi_curtana" remote="leddaz" />
     <project path="vendor/xiaomi/miatoll-gcam" name="android_vendor_xiaomi_miatoll-gcam" remote="leddaz-gitlab" />    
     
