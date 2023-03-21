@@ -14,7 +14,7 @@
 
     <!-- Vendor -->
     <project path="vendor/hardware/xiaomi" name="android_vendor_hardware_xiaomi" remote="statix" revision="tm" />
-    <project path="vendor/xiaomi/curtana" name="android_vendor_xiaomi_curtana" remote="gitlab" revision="tm" />
+    <project path="vendor/xiaomi/curtana" name="android_vendor_xiaomi_curtana" remote="leddaz" />
     <project path="vendor/gcam" name="android_vendor_gcam" remote="gitlab" revision="tm-qpr1" />    
     
 </manifest>
