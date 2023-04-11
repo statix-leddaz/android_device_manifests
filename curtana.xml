@@ -10,11 +10,11 @@
     <!-- Device -->
     <project path="device/xiaomi/curtana" name="android_device_xiaomi_curtana" remote="leddaz" />
     <project path="device/xiaomi/curtana-firmware" name="android_device_xiaomi_curtana-firmware" remote="leddaz-gitlab" />
-    <project path="device/xiaomi/curtana-kernel" name="android_device_xiaomi_curtana-kernel" remote="statix" revision="tm" />
+    <project path="device/xiaomi/curtana-kernel" name="android_device_xiaomi_curtana-kernel" remote="leddaz" />
 
     <!-- Vendor -->
-    <project path="vendor/hardware/xiaomi" name="android_vendor_hardware_xiaomi" remote="statix" revision="tm" />
+    <project path="vendor/hardware/xiaomi" name="android_vendor_hardware_xiaomi" remote="stx-miatoll" revision="tm" />
     <project path="vendor/xiaomi/curtana" name="android_vendor_xiaomi_curtana" remote="leddaz" />
-    <project path="vendor/gcam" name="android_vendor_gcam" remote="gitlab" revision="tm-qpr1" />    
+    <project path="vendor/gcam" name="android_vendor_gcam" remote="gitlab" revision="tm-qpr2" />    
     
 </manifest>
