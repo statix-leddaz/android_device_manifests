@@ -174,7 +174,7 @@ else
             mkdir -p .repo/local_manifests/
         fi
         cp device/manifests/$TARGET.xml .repo/local_manifests/
-        repo sync --no-tags --no-clone-bundle || exit_on_error
+        repo sync -c -j$(nproc --all) --force-sync --no-tags --no-clone-bundle || exit_on_error
     fi
 fi
 
