@@ -12,9 +12,11 @@
     <project path="device/xiaomi/curtana-firmware" name="android_device_xiaomi_curtana-firmware" remote="leddaz-gitlab" />
     <project path="device/xiaomi/curtana-kernel" name="android_device_xiaomi_curtana-kernel" remote="leddaz" />
 
+    <!-- Packages -->
+    <project path="packages/apps/RevampedFMRadio" name="iusmac/RevampedFMRadio" remote="github" revision="qcom" />
+
     <!-- Vendor -->
     <project path="vendor/hardware/xiaomi" name="android_vendor_hardware_xiaomi" remote="stx-miatoll" revision="tm" />
-    <project path="vendor/qcom/opensource/fm-commonsys" name="LineageOS/android_vendor_qcom_opensource_fm-commonsys" remote="github" revision="lineage-20.0" groups="qcom,qssi" />
     <project path="vendor/xiaomi/curtana" name="android_vendor_xiaomi_curtana" remote="leddaz" />
     <project path="vendor/xiaomi/curtana-gcam" name="android_vendor_xiaomi_curtana-gcam" remote="leddaz-gitlab" />
     
