@@ -15,6 +15,5 @@
     <!-- Vendor -->
     <project path="vendor/hardware/xiaomi" name="android_vendor_hardware_xiaomi" remote="statix" revision="tm" />
     <project path="vendor/xiaomi/curtana" name="android_vendor_xiaomi_curtana" remote="leddaz" />
-    <project path="vendor/xiaomi/curtana-gcam" name="android_vendor_xiaomi_curtana-gcam" remote="leddaz-gitlab" />
     
 </manifest>
