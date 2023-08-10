@@ -8,6 +8,7 @@
     <remote name="leddaz-gitlab" fetch="https://gitlab.com/LeddaZ" revision="tm" />
 
     <!-- Device -->
+    <project path="device/google/gs-common" name="device/google/gs-common" remote="aosp" />
     <project path="device/google/gs101" name="android_device_google_gs101" remote="leddaz" />
     <project path="device/google/gs101-sepolicy" name="android_device_google_gs101-sepolicy" remote="leddaz" />
     <project path="device/google/raviole" name="android_device_google_raviole" remote="leddaz" />
