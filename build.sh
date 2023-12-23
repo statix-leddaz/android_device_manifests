@@ -44,8 +44,8 @@ OPTIONS:
     -s, --sixtyfour-bits
         Builds a 64-bit only package if supported by the device tree
 
-    -u, --update-api
-        Update APIs
+    -u, --udc
+        Sets STATIX_BUILD_TYPE=UpsideDownCake
 
     -v, --build_variant
         Build variant (Default: userdebug)
@@ -99,18 +99,13 @@ get_target_dirs() {
   echo "${target_dirs:-""}"  # Handle potential empty or missing value
 }
 
-update_api() {
-    echo -e "\nINFO: Updating APIs\n"
-    m update-api | tee $LOG_FILE.log
-}
-
 # Set defaults
 VARIANT="userdebug"
 JOBS=$(nproc --all)
 
 # Setup getopt.
 long_opts="clean_build,debug,help,image:,jobs:,log_file:,module:,"
-long_opts+="sixtyfour-bits,package-type:,update-api,build_variant:"
+long_opts+="sixtyfour-bits,package-type:,udc,build_variant:"
 getopt_cmd=$(getopt -o cdhi:j:k:l:m:p:suv: --long "$long_opts" \
             -n $(basename $0) -- "$@") || \
             { echo -e "\nERROR: Getopt failed. Extra args\n"; usage; exit 1;}
@@ -128,7 +123,7 @@ while true; do
         -m|--module) MODULE="$2"; shift;;
         -p|--package-type) PKG="$2"; shift;;
         -s|--sixtyfour-bits) SIXTYFOUR_BITS="true";;
-        -u|--update-api) UPDATE_API="true";;
+        -u|--udc) UDC="true";;
         -v|--build_variant) VARIANT="$2"; shift;;
         --) shift; break;;
     esac
@@ -201,6 +196,10 @@ else
     fi
 fi
 
+if [ "$UDC" = "true" ]; then
+    export STATIX_BUILD_TYPE=UpsideDownCake
+fi
+
 if [ "$SIXTYFOUR_BITS" = "true" ]; then
     lunch statix_${TARGET}_64-$VARIANT || exit_on_error
 else
@@ -210,10 +209,6 @@ m installclean
 
 if [ "$CLEAN_BUILD" = "true" ]; then
     clean_build
-fi
-
-if [ "$UPDATE_API" = "true" ]; then
-    update_api
 fi
 
 if [ -n "$MODULE" ]; then
