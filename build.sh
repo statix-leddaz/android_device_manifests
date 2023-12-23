@@ -106,7 +106,7 @@ update_api() {
 
 # Set defaults
 VARIANT="userdebug"
-JOBS=8
+JOBS=$(nproc --all)
 
 # Setup getopt.
 long_opts="clean_build,debug,help,image:,jobs:,log_file:,module:,"
