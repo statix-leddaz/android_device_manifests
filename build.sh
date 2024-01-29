@@ -154,6 +154,8 @@ case "$PKG" in
         PKG="bacon" ;;
     "updatepackage")
         PKG="updatepackage" ;;
+    "targetfiles")
+        PKG="target-files-package otatools" ;;
     *)
         echo "Unknown package type! Bailing out!" && exit 1 ;;
 esac
