@@ -201,9 +201,9 @@ if [ "$UDC" = "true" ]; then
 fi
 
 if [ "$SIXTYFOUR_BITS" = "true" ]; then
-    lunch statix_${TARGET}_64-$VARIANT || exit_on_error
+    lunch statix_${TARGET}_64-ap1a-$VARIANT || exit_on_error
 else
-    lunch statix_$TARGET-$VARIANT || exit_on_error
+    lunch statix_$TARGET-ap1a-$VARIANT || exit_on_error
 fi
 m installclean
 
