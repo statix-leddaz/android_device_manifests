@@ -32,9 +32,6 @@ OPTIONS:
     -j, --jobs
         Specifies the number of jobs to run simultaneously (Default: 8)
 
-    -l, --log_file
-        Log file to store build logs (Default: <TARGET_PRODUCT>.log)
-
     -m, --module
         Module to be build
 
@@ -60,27 +57,27 @@ clean_build() {
 
 build_android() {
     echo -e "\nINFO: Build Android tree for $TARGET\n"
-    m $@ | tee $LOG_FILE.log
+    m $@
 }
 
 build_bootimg() {
     echo -e "\nINFO: Build bootimage for $TARGET\n"
-    m bootimage $@ | tee $LOG_FILE.log
+    m bootimage $@
 }
 
 build_sysimg() {
     echo -e "\nINFO: Build systemimage for $TARGET\n"
-    m systemimage $@ | tee $LOG_FILE.log
+    m systemimage $@
 }
 
 build_usrimg() {
     echo -e "\nINFO: Build userdataimage for $TARGET\n"
-    m userdataimage $@ | tee $LOG_FILE.log
+    m userdataimage $@
 }
 
 build_module() {
     echo -e "\nINFO: Build $MODULE for $TARGET\n"
-    m $MODULE $@ | tee $LOG_FILE.log
+    m $MODULE $@
 }
 
 exit_on_error() {
@@ -104,9 +101,9 @@ VARIANT="userdebug"
 JOBS=$(nproc --all)
 
 # Setup getopt.
-long_opts="clean_build,debug,help,image:,jobs:,log_file:,module:,"
+long_opts="clean_build,debug,help,image:,jobs:,module:,"
 long_opts+="sixtyfour-bits,package-type:,udc,build_variant:"
-getopt_cmd=$(getopt -o cdhi:j:k:l:m:p:suv: --long "$long_opts" \
+getopt_cmd=$(getopt -o cdhi:j:k:m:p:suv: --long "$long_opts" \
             -n $(basename $0) -- "$@") || \
             { echo -e "\nERROR: Getopt failed. Extra args\n"; usage; exit 1;}
 
@@ -119,7 +116,6 @@ while true; do
         -h|--help) usage; exit 0;;
         -i|--image) IMAGE="$2"; shift;;
         -j|--jobs) JOBS="$2"; shift;;
-        -l|--log_file) LOG_FILE="$2"; shift;;
         -m|--module) MODULE="$2"; shift;;
         -p|--package-type) PKG="$2"; shift;;
         -s|--sixtyfour-bits) SIXTYFOUR_BITS="true";;
@@ -156,10 +152,6 @@ case "$PKG" in
 esac
 
 TARGET="$1"; shift
-
-if [ -z $LOG_FILE ]; then
-    LOG_FILE=$TARGET
-fi
 
 CMD="-j $JOBS"
 if [ "$DEBUG" = "true" ]; then
