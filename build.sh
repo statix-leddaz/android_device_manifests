@@ -140,7 +140,7 @@ fi
 
 case "$PKG" in
     "")
-        PKG="bacon" ;;
+        PKG="stxrelease" ;;
     "otapackage")
         PKG="bacon" ;;
     "updatepackage")
