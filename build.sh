@@ -166,7 +166,6 @@ else
     echo "Checking if tree exists in manifests"
     if test -f "device/manifests/$TARGET.xml"; then
         echo "Syncing $TARGET trees"
-        target_dirs=$(get_target_dirs "device/manifests/$TARGET.xml")
         # Clear older manifests
         if ! [ -d .repo/local_manifests ]; then
             mkdir -p .repo/local_manifests/
@@ -175,16 +174,7 @@ else
         fi
         cp device/manifests/$TARGET.xml .repo/local_manifests/$TARGET.xml
 
-        # Loop through each extracted target directory and sync
-        if [[ ! -z "$target_dirs" ]]; then
-            IFS=$'\n' read -r -a target_dir_array <<< "$target_dirs"
-            for dir in "${target_dir_array[@]}"; do
-                repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags "$dir"
-            done
-        else
-            echo "Error: Target directories not found in $manifest_file"
-            exit_on_error
-        fi
+        repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
     fi
 fi
 
