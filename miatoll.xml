@@ -7,7 +7,7 @@
     <remote name="leddaz" fetch="https://github.com/LeddaZ" revision="vic" />
 
     <!-- Device -->
-    <project path="device/xiaomi/miatoll" name="android_device_xiaomi_miatoll" remote="leddaz" />
+    <project path="device/xiaomi/miatoll" name="android_device_xiaomi_miatoll" remote="leddaz" revision="vic-aosp" />
     <project path="device/xiaomi/miatoll-kernel" name="android_device_xiaomi_miatoll-kernel" remote="leddaz" />
 
     <!-- Vendor -->
