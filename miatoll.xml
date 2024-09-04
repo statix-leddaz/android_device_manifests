@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
 
-    <!-- StatiXOS 7.x manifest for miatoll -->
+    <!-- StatiXOS 8.x manifest for miatoll -->
 
     <!-- Remotes -->
-    <remote name="leddaz" fetch="https://github.com/LeddaZ" revision="udc" />
+    <remote name="leddaz" fetch="https://github.com/LeddaZ" revision="vic" />
 
     <!-- Device -->
     <project path="device/xiaomi/miatoll" name="android_device_xiaomi_miatoll" remote="leddaz" />
     <project path="device/xiaomi/miatoll-kernel" name="android_device_xiaomi_miatoll-kernel" remote="leddaz" />
 
     <!-- Vendor -->
-    <project path="vendor/hardware/xiaomi" name="android_vendor_hardware_xiaomi" remote="stx-leddaz" revision="udc" />
+    <project path="vendor/hardware/xiaomi" name="StatiXOS/android_vendor_hardware_xiaomi" remote="github" revision="udc" />
     <project path="vendor/xiaomi/miatoll" name="android_vendor_xiaomi_miatoll" remote="leddaz" />
     
 </manifest>
