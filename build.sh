@@ -38,11 +38,8 @@ OPTIONS:
     -p, --package-type
         Specifies package type to build (Default: otapackage)
 
-    -s, --sixtyfour-bits
-        Builds a 64-bit only package if supported by the device tree
-
-    -u, --udc
-        Sets STATIX_BUILD_TYPE=UpsideDownCake
+    -o, --official
+        Sets STATIX_BUILD_TYPE=OFFICIAL
 
     -v, --build_variant
         Build variant (Default: userdebug)
@@ -102,8 +99,8 @@ JOBS=$(nproc --all)
 
 # Setup getopt.
 long_opts="clean_build,debug,help,image:,jobs:,module:,"
-long_opts+="sixtyfour-bits,package-type:,udc,build_variant:"
-getopt_cmd=$(getopt -o cdhi:j:k:m:p:suv: --long "$long_opts" \
+long_opts+="package-type:,off,build_variant:"
+getopt_cmd=$(getopt -o cdhi:j:k:m:p:ov: --long "$long_opts" \
             -n $(basename $0) -- "$@") || \
             { echo -e "\nERROR: Getopt failed. Extra args\n"; usage; exit 1;}
 
@@ -118,8 +115,7 @@ while true; do
         -j|--jobs) JOBS="$2"; shift;;
         -m|--module) MODULE="$2"; shift;;
         -p|--package-type) PKG="$2"; shift;;
-        -s|--sixtyfour-bits) SIXTYFOUR_BITS="true";;
-        -u|--udc) UDC="true";;
+        -o|--off) OFF="true";;
         -v|--build_variant) VARIANT="$2"; shift;;
         --) shift; break;;
     esac
@@ -178,15 +174,11 @@ else
     fi
 fi
 
-if [ "$UDC" = "true" ]; then
-    export STATIX_BUILD_TYPE=UpsideDownCake
+if [ "$OFF" = "true" ]; then
+    export STATIX_BUILD_TYPE=OFFICIAL
 fi
 
-if [ "$SIXTYFOUR_BITS" = "true" ]; then
-    lunch statix_${TARGET}_64-ap2a-$VARIANT || exit_on_error
-else
-    lunch statix_$TARGET-ap2a-$VARIANT || exit_on_error
-fi
+lunch statix_$TARGET-ap3a-$VARIANT || exit_on_error
 m installclean
 
 if [ "$CLEAN_BUILD" = "true" ]; then

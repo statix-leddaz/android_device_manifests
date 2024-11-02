@@ -11,7 +11,7 @@
     <project path="device/xiaomi/miatoll-kernel" name="android_device_xiaomi_miatoll-kernel" remote="leddaz" />
 
     <!-- Vendor -->
-    <project path="vendor/hardware/xiaomi" name="StatiXOS/android_vendor_hardware_xiaomi" remote="github" revision="udc" />
+    <project path="vendor/hardware/xiaomi" name="statix-leddaz/android_vendor_hardware_xiaomi" remote="github" revision="vic" />
     <project path="vendor/xiaomi/miatoll" name="android_vendor_xiaomi_miatoll" remote="leddaz" />
     
 </manifest>
