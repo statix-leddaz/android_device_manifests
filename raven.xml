@@ -14,7 +14,7 @@
     <project path="device/google/raviole-kernel" name="hentaiOS-Devices/device_google_raviole-kernel" remote="github" revision="Ursamoon" />
 
     <!-- Vendor -->
-    <project path="vendor/google/pixelparts" name="LeddaZ/android_vendor_google_pixelparts" remote="gitea" revision="vic" />
+    <project path="vendor/google/pixelparts" name="LeddaZ/android_vendor_google_pixelparts" remote="gitea" revision="vic-qpr1" />
     <project path="vendor/google_devices/raven" name="LeddaZ/android_vendor_google_devices_raven" remote="gitea" revision="vic" />
     
 </manifest>
