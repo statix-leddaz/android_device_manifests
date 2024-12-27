@@ -38,14 +38,17 @@ OPTIONS:
     -p, --package-type
         Specifies package type to build (Default: otapackage)
 
-    -o, --official
-        Sets STATIX_BUILD_TYPE=OFFICIAL
+    -u, --update-api
+        Update APIs
 
     -v, --build_variant
         Build variant (Default: userdebug)
 
 USAGE
 }
+
+# Set release
+RELEASE=ap4a
 
 clean_build() {
     echo -e "\nINFO: Removing entire out dir. . .\n"
@@ -79,6 +82,9 @@ build_module() {
 
 exit_on_error() {
     exit_code=$1
+    if [ -d $exit_code ]; then
+        exit_code=1
+    fi
     last_command=${@:2}
     if [ $exit_code -ne 0 ]; then
         >&2 echo "\"${last_command}\" command failed with exit code ${exit_code}."
@@ -86,11 +92,9 @@ exit_on_error() {
     fi
 }
 
-# Device sync related
-get_target_dirs() {
-  local manifest_file="$1"
-  target_dirs=$(grep -E 'path="[^"]+"' "$manifest_file" | awk -F'"' '{print $2}')
-  echo "${target_dirs:-""}"  # Handle potential empty or missing value
+update_api() {
+    echo -e "\nINFO: Updating APIs\n"
+    m update-api | tee $LOG_FILE.log
 }
 
 # Set defaults
@@ -99,8 +103,8 @@ JOBS=$(nproc --all)
 
 # Setup getopt.
 long_opts="clean_build,debug,help,image:,jobs:,module:,"
-long_opts+="package-type:,off,build_variant:"
-getopt_cmd=$(getopt -o cdhi:j:k:m:p:ov: --long "$long_opts" \
+long_opts+="package-type:,update-api,build_variant:"
+getopt_cmd=$(getopt -o cdhi:j:k:m:p:s:uv: --long "$long_opts" \
             -n $(basename $0) -- "$@") || \
             { echo -e "\nERROR: Getopt failed. Extra args\n"; usage; exit 1;}
 
@@ -115,7 +119,7 @@ while true; do
         -j|--jobs) JOBS="$2"; shift;;
         -m|--module) MODULE="$2"; shift;;
         -p|--package-type) PKG="$2"; shift;;
-        -o|--off) OFF="true";;
+        -u|--update-api) UPDATE_API="true";;
         -v|--build_variant) VARIANT="$2"; shift;;
         --) shift; break;;
     esac
@@ -141,8 +145,6 @@ case "$PKG" in
         PKG="bacon" ;;
     "updatepackage")
         PKG="updatepackage" ;;
-    "targetfiles")
-        PKG="target-files-package otatools" ;;
     *)
         echo "Unknown package type! Bailing out!" && exit 1 ;;
 esac
@@ -169,20 +171,18 @@ else
             rm -rf .repo/local_manifests/*.xml
         fi
         cp device/manifests/$TARGET.xml .repo/local_manifests/$TARGET.xml
-
-        repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+        repo sync -c -j8 --force-sync --no-clone-bundle --no-tags --optimized-fetch
     fi
 fi
 
-if [ "$OFF" = "true" ]; then
-    export STATIX_BUILD_TYPE=OFFICIAL
-fi
-
-lunch statix_$TARGET-ap3a-$VARIANT || exit_on_error
-m installclean
+lunch statix_$TARGET-$RELEASE-$VARIANT || exit_on_error
 
 if [ "$CLEAN_BUILD" = "true" ]; then
     clean_build
+fi
+
+if [ "$UPDATE_API" = "true" ]; then
+    update_api
 fi
 
 if [ -n "$MODULE" ]; then
