@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+    <!-- StatiXOS 8.x manifest for raven -->
+
+    <!-- Remotes -->
+    <remote name="leddaz" fetch="https://github.com/LeddaZ" revision="vic" />
+
+    <!-- Device -->
+    <project path="device/google/gs-common" name="device/google/gs-common" remote="aosp" />
+    <project path="device/google/gs101" name="android_device_google_gs101" remote="leddaz" />
+    <project path="device/google/gs101-sepolicy" name="android_device_google_gs101-sepolicy" remote="leddaz" />
+    <project path="device/google/raviole" name="android_device_google_raviole" remote="leddaz" />
+    <project path="device/google/raviole-kernel" name="hentaiOS-Devices/device_google_raviole-kernel" remote="github" revision="Ursamoon" />
+
+    <!-- Vendor -->
+    <project path="vendor/google/pixelparts" name="LeddaZ/android_vendor_google_pixelparts" remote="gitea" revision="vic" />
+    <project path="vendor/google_devices/raven" name="LeddaZ/android_vendor_google_devices_raven" remote="gitea" revision="vic" />
+    
+</manifest>
